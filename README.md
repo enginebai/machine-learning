@@ -1,4 +1,4 @@
 machine-learning
 ================
 
-Machine Learning in Action Eample Code
+Machine Learning in Action Example Code
