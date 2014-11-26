@@ -9,20 +9,20 @@ def create_trainset():
     :return:
     """
     trainset_tf = dict()
-    trainset_tf[u'陽明山'] = (15, 25, 0, 5, 8, 3)
-    trainset_tf[u'中正紀念堂'] = (35, 40, 1, 3, 3, 2)
-    trainset_tf[u'北港肉羹'] = (5, 0, 35, 50, 0, 0)
-    trainset_tf[u'蚵仔煎'] = (1, 5, 32, 15, 0, 0)
-    trainset_tf[u'圓山大飯店'] = (10, 5, 7, 0, 2, 30)
-    trainset_tf[u'W Hotel'] = (5, 5, 5, 15, 8, 32)
+    trainset_tf[u'政見發表會'] = (15, 25, 0, 5, 8, 3)
+    trainset_tf[u'黨工網軍'] = (35, 40, 1, 3, 3, 2)
+    trainset_tf[u'林書豪'] = (5, 0, 35, 50, 0, 0)
+    trainset_tf[u'湖人隊'] = (1, 5, 32, 15, 0, 0)
+    trainset_tf[u'Android 5.0'] = (10, 5, 7, 0, 2, 30)
+    trainset_tf[u'iPhone6'] = (5, 5, 5, 15, 8, 32)
 
     trainset_class = dict()
-    trainset_class[u'陽明山'] = 'V'
-    trainset_class[u'中正紀念堂'] = 'V'
-    trainset_class[u'北港肉羹'] = 'D'
-    trainset_class[u'蚵仔煎'] = 'D'
-    trainset_class[u'圓山大飯店'] = 'A'
-    trainset_class[u'W Hotel'] = 'A'
+    trainset_class[u'政見發表會'] = 'P'
+    trainset_class[u'黨工網軍'] = 'P'
+    trainset_class[u'林書豪'] = 'S'
+    trainset_class[u'湖人隊'] = 'S'
+    trainset_class[u'Android 5.0'] = 'T'
+    trainset_class[u'iPhone6'] = 'T'
 
     return trainset_tf, trainset_class
 
