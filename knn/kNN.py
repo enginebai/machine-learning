@@ -70,7 +70,11 @@ def file2matrix(file_name):
             index += 1
     return num_matrix, class_label_vector
 
-
-
-
-
+if __name__ == '__main__':
+    dating_data_matrix, dating_labels = file2matrix('datingTestSet.txt')
+    import matplotlib.pyplot as plot
+    fig = plot.figure()
+    ax = fig.add_subplot(111)
+    ax.scatter(dating_data_matrix[:, 1], dating_data_matrix[:, 2],
+               15.0 * array(dating_labels), 15.0 * array(dating_labels))
+    plot.show()
