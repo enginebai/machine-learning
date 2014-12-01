@@ -85,13 +85,34 @@ def normalize(data_set):
     normalize_data_set = normalize_data_set / tile(range_val, (m, 1))
     return normalize_data_set, range_val, min_val
 
-if __name__ == '__main__':
+def knn_classifier_test():
+    # 訓練集合資料用來當作測試的比例
+    test_ratio = 0.05
     dating_data_matrix, dating_labels = file2matrix('datingTestSet.txt')
     normalize_dating_data_matrix, ranges, min_val = normalize(dating_data_matrix)
-    print normalize_dating_data_matrix
-    import matplotlib.pyplot as plot
-    fig = plot.figure()
-    ax = fig.add_subplot(111)
-    ax.scatter(normalize_dating_data_matrix[:, 0], normalize_dating_data_matrix[:, 2],
-               15.0 * array(dating_labels), 15.0 * array(dating_labels))
-    plot.show()
+
+    # print normalize_dating_data_matrix
+    # import matplotlib.pyplot as plot
+    # fig = plot.figure()
+    # ax = fig.add_subplot(111)
+    # ax.scatter(normalize_dating_data_matrix[:, 0], normalize_dating_data_matrix[:, 2],
+    #            15.0 * array(dating_labels), 15.0 * array(dating_labels))
+    # plot.show()
+    
+    m = normalize_dating_data_matrix.shape[0]
+    num_test = int(m * test_ratio)
+    err_count = 0.0
+    for i in range(num_test):
+        class_result = knn_classify(normalize_dating_data_matrix[i, :],
+                                    normalize_dating_data_matrix[num_test: m,:],
+                                    dating_labels[num_test:m], 7)
+        print 'Classifier = %d, real answer = %d' % (class_result, dating_labels[i]),
+        if class_result != dating_labels[i]:
+            err_count += 1
+            print '[X]'
+        else:
+            print '[O]'
+    print "Total error rate = %.2f%%" % (err_count / float(num_test) * 100.0)
+
+if __name__ == '__main__':
+    knn_classifier_test()
