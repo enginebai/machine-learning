@@ -70,11 +70,28 @@ def file2matrix(file_name):
             index += 1
     return num_matrix, class_label_vector
 
+def normalize(data_set):
+    """
+    Normalize the data set value to range(0, 1)
+    :param data_set:
+    :return:
+    """
+    min_val = data_set.min(0)
+    max_val = data_set.max(0)
+    range_val = max_val - min_val
+    normalize_data_set = zeros(shape(data_set))
+    m = data_set.shape[0]
+    normalize_data_set = data_set - tile(min_val, (m, 1))
+    normalize_data_set = normalize_data_set / tile(range_val, (m, 1))
+    return normalize_data_set, range_val, min_val
+
 if __name__ == '__main__':
     dating_data_matrix, dating_labels = file2matrix('datingTestSet.txt')
+    normalize_dating_data_matrix, ranges, min_val = normalize(dating_data_matrix)
+    print normalize_dating_data_matrix
     import matplotlib.pyplot as plot
     fig = plot.figure()
     ax = fig.add_subplot(111)
-    ax.scatter(dating_data_matrix[:, 1], dating_data_matrix[:, 2],
+    ax.scatter(normalize_dating_data_matrix[:, 0], normalize_dating_data_matrix[:, 2],
                15.0 * array(dating_labels), 15.0 * array(dating_labels))
     plot.show()
