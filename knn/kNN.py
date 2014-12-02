@@ -91,28 +91,42 @@ def knn_classifier_test():
     dating_data_matrix, dating_labels = file2matrix('datingTestSet.txt')
     normalize_dating_data_matrix, ranges, min_val = normalize(dating_data_matrix)
 
-    # print normalize_dating_data_matrix
-    # import matplotlib.pyplot as plot
-    # fig = plot.figure()
-    # ax = fig.add_subplot(111)
-    # ax.scatter(normalize_dating_data_matrix[:, 0], normalize_dating_data_matrix[:, 2],
-    #            15.0 * array(dating_labels), 15.0 * array(dating_labels))
-    # plot.show()
-    
+    print normalize_dating_data_matrix
+    import matplotlib.pyplot as plot
+    fig = plot.figure()
+    ax = fig.add_subplot(111)
+    ax.scatter(normalize_dating_data_matrix[:, 0], normalize_dating_data_matrix[:, 2],
+               15.0 * array(dating_labels), 15.0 * array(dating_labels))
+    plot.show()
+
     m = normalize_dating_data_matrix.shape[0]
     num_test = int(m * test_ratio)
     err_count = 0.0
     for i in range(num_test):
-        class_result = knn_classify(normalize_dating_data_matrix[i, :],
+        classify_result = knn_classify(normalize_dating_data_matrix[i, :],
                                     normalize_dating_data_matrix[num_test: m,:],
                                     dating_labels[num_test:m], 7)
-        print 'Classifier = %d, real answer = %d' % (class_result, dating_labels[i]),
-        if class_result != dating_labels[i]:
+        print 'Classifier = %d, real answer = %d' % (classify_result, dating_labels[i]),
+        if classify_result != dating_labels[i]:
             err_count += 1
             print '[X]'
         else:
             print '[O]'
     print "Total error rate = %.2f%%" % (err_count / float(num_test) * 100.0)
 
+def classify_person():
+    result_list = ['not at all', 'a little', 'very like']
+    play_ratio = float(raw_input('Enter play ratio >> '))
+    flier_mile = float(raw_input('Enter flier miles >> '))
+    ice_cream = float(raw_input('Enter liters of ice cream >> '))
+
+    dating_data_matrix, dating_labels = file2matrix('datingTestSet2.txt')
+    normalize_dating_data_matrix, ranges, min_val = normalize(dating_data_matrix)
+    input = array([flier_mile, play_ratio, ice_cream])
+    classify_result = knn_classify((input - min_val) / ranges, normalize_dating_data_matrix,
+                                   dating_labels, 3)
+    print 'You will like this person = %s' % result_list[classify_result - 1]
+
 if __name__ == '__main__':
     knn_classifier_test()
+    classify_person()
