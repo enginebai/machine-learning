@@ -24,3 +24,17 @@ def calculate_entropy(dataset):
         prob = float(label_count[label]) / num_entries
         entropy -= prob * log(prob, 2)
     return entropy
+
+def create_data_set():
+    data_set = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'yes'], [0, 1, 'yes'], [0, 1, 'y']]
+    labels = ['no', 'flippers']
+    return data_set, labels
+
+def split_data_set(data_set, axis, value):
+    new_data_set = []
+    for feature_vector in data_set:
+        if feature_vector[axis] == value:
+            reduced_feature_vector = feature_vector[:axis]
+            reduced_feature_vector.extend(feature_vector[axis + 1:])
+            new_data_set.append(reduced_feature_vector)
+    return new_data_set
