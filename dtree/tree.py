@@ -4,6 +4,7 @@ __author__ = 'enginebai'
 
 from math import log
 import operator
+import matplotlib.pyplot as plt
 
 def calculate_entropy(dataset):
     """
@@ -28,7 +29,7 @@ def calculate_entropy(dataset):
 
 def create_data_set():
     data_set = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
-    labels = ['no', 'flippers']
+    labels = ['no surfacing', 'flippers']
     return data_set, labels
 
 def split_data_set(data_set, axis, value):
@@ -91,7 +92,6 @@ def cal_major_class(class_list):
 
 def create_tree(data_set, labels):
     """
-
     :param data_set:
     :param labels:
     :return:
@@ -117,3 +117,16 @@ def create_tree(data_set, labels):
         sub_labels = labels[:]
         decision_tree[best_feature_label][value] = create_tree(split_data_set(data_set, best_feature, value), sub_labels)
     return decision_tree
+
+def classify(input_tree, feature_labels, test_vector):
+    first_key = input_tree.keys()[0]
+    second_dict = input_tree[first_key]
+    feature_index = feature_labels.index(first_key)
+    class_label = ''
+    for key in second_dict.keys():
+        if test_vector[feature_index] == key:
+            if type(second_dict[key]).__name__ == 'dict':
+                class_label = classify(second_dict[key], feature_labels, test_vector)
+            else:
+                class_label = second_dict[key]
+    return class_label
