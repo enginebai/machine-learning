@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Programming_in_Python3/.idea/Programming_in_Python3.iml" filepath="$PROJECT_DIR$/../Programming_in_Python3/.idea/Programming_in_Python3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../github-issues-import/.idea/github-issues-import.iml" filepath="$PROJECT_DIR$/../github-issues-import/.idea/github-issues-import.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/machine-learning.iml" filepath="$PROJECT_DIR$/.idea/machine-learning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../JavaProject/styletrip_engine/py/.idea/py.iml" filepath="$PROJECT_DIR$/../../JavaProject/styletrip_engine/py/.idea/py.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../styletrip-engine.py/.idea/styletrip-engine.py.iml" filepath="$PROJECT_DIR$/../styletrip-engine.py/.idea/styletrip-engine.py.iml" />
     </modules>
   </component>
 </project>
-

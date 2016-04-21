@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'enginebai'
 
-from numpy import *
 import os
-import kNN
+
+from numpy import *
+
+from knn import knn_classify
+
 
 def img2vector(file_name):
     """
@@ -23,8 +26,8 @@ def img2vector(file_name):
                 vector[0, 32 * i + j] = int(line[j])
     return vector
 
-def digit_classifier():
 
+def digit_classifier():
     # training phase
     digit_labels = []
     train_file_list = os.listdir('trainingDigits')
@@ -49,9 +52,9 @@ def digit_classifier():
         file_name = file_full_name.split('.')[0]
         digit_name = int(file_name.split('_')[0])
         test_vector = img2vector('testDigits/%s' % file_full_name)
-        classify_result = kNN.knn_classify(test_vector, train_vector, digit_labels, 3)
-        print 'Classify result = %s, real answer = %s' % (classify_result, digit_name)
+        classify_result = knn_classify(test_vector, train_vector, digit_labels, 3)
+        print('Classify result = %s, real answer = %s' % (classify_result, digit_name))
         if classify_result != digit_name:
             error_count += 1
 
-    print 'Total error = %d, error rate = %f' % (error_count, (error_count / float(test_file_num)))
+    print('Total error = %d, error rate = %f' % (error_count, (error_count / float(test_file_num))))

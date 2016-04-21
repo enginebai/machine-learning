@@ -6,6 +6,7 @@ from math import log
 import operator
 import matplotlib.pyplot as plt
 
+
 def calculate_entropy(dataset):
     """
     計算一個數據的entropy。
@@ -27,10 +28,12 @@ def calculate_entropy(dataset):
         entropy -= prob * log(prob, 2)
     return entropy
 
+
 def create_data_set():
     data_set = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
     labels = ['no surfacing', 'flippers']
     return data_set, labels
+
 
 def split_data_set(data_set, axis, value):
     """
@@ -47,6 +50,7 @@ def split_data_set(data_set, axis, value):
             reduced_feature_vector.extend(feature_vector[axis + 1:])
             new_data_set.append(reduced_feature_vector)
     return new_data_set
+
 
 def choose_best_feature_to_split(data_set):
     """
@@ -75,6 +79,7 @@ def choose_best_feature_to_split(data_set):
 
     return best_feature
 
+
 def cal_major_class(class_list):
     """
     計算目前出現頻率最多的分類名稱。
@@ -89,6 +94,7 @@ def cal_major_class(class_list):
 
     sorted_class_count = sorted(class_count.iteritems(), key=operator.itemgetter(1), reverse=True)
     return sorted_class_count[0][0]
+
 
 def create_tree(data_set, labels):
     """
@@ -110,13 +116,15 @@ def create_tree(data_set, labels):
     best_feature = choose_best_feature_to_split(data_set)
     best_feature_label = labels[best_feature]
     decision_tree = {best_feature_label: {}}
-    del(labels[best_feature])
+    del (labels[best_feature])
     feature_value = [instance[best_feature] for instance in data_set]
     unique_value = set(feature_value)
     for value in unique_value:
         sub_labels = labels[:]
-        decision_tree[best_feature_label][value] = create_tree(split_data_set(data_set, best_feature, value), sub_labels)
+        decision_tree[best_feature_label][value] = create_tree(split_data_set(data_set, best_feature, value),
+                                                               sub_labels)
     return decision_tree
+
 
 def classify(input_tree, feature_labels, test_vector):
     first_key = input_tree.keys()[0]

@@ -2,8 +2,11 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.4.3 virtualenv at ~/py" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="github-issues-import" />
+    <orderEntry type="module" module-name="styletrip-engine.py" />
+    <orderEntry type="module" module-name="Programming_in_Python3" />
+    <orderEntry type="module" module-name="py" />
   </component>
 </module>
-

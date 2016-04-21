@@ -6,14 +6,16 @@ __author__ = 'enginebai'
 from numpy import *
 import operator
 
+
 def create_data_set():
     """
     產生訓練集合。
     :return:
     """
-    group = array([[1.0, 1.1],[1.0, 1.0],[0, 0],[0, 0.1]])
+    group = array([[1.0, 1.1], [1.0, 1.0], [0, 0], [0, 0.1]])
     labels = ['A', 'A', 'B', 'B']
     return group, labels
+
 
 def knn_classify(input, data_set, labels, k):
     """
@@ -42,6 +44,7 @@ def knn_classify(input, data_set, labels, k):
     # return the knn label
     return sorted_class_count[0][0]
 
+
 def file2matrix(file_name):
     """
     將輸入檔案的數值轉成NumPy可以解析的物件格式。
@@ -51,7 +54,7 @@ def file2matrix(file_name):
     with open(file_name, 'r') as f:
         array_lines = f.readlines()
         number_lines = len(array_lines)
-        num_matrix = zeros((number_lines,3))
+        num_matrix = zeros((number_lines, 3))
         class_label_vector = []
         index = 0
         for line in array_lines:
@@ -70,6 +73,7 @@ def file2matrix(file_name):
             index += 1
     return num_matrix, class_label_vector
 
+
 def normalize(data_set):
     """
     Normalize the data set value to range(0, 1)
@@ -85,13 +89,14 @@ def normalize(data_set):
     normalize_data_set = normalize_data_set / tile(range_val, (m, 1))
     return normalize_data_set, range_val, min_val
 
+
 def knn_classifier_test():
     # 訓練集合資料用來當作測試的比例
     test_ratio = 0.05
     dating_data_matrix, dating_labels = file2matrix('datingTestSet.txt')
     normalize_dating_data_matrix, ranges, min_val = normalize(dating_data_matrix)
 
-    print normalize_dating_data_matrix
+    print(normalize_dating_data_matrix)
     import matplotlib.pyplot as plot
     fig = plot.figure()
     ax = fig.add_subplot(111)
@@ -104,28 +109,30 @@ def knn_classifier_test():
     err_count = 0.0
     for i in range(num_test):
         classify_result = knn_classify(normalize_dating_data_matrix[i, :],
-                                    normalize_dating_data_matrix[num_test: m,:],
-                                    dating_labels[num_test:m], 7)
-        print 'Classifier = %d, real answer = %d' % (classify_result, dating_labels[i]),
+                                       normalize_dating_data_matrix[num_test: m, :],
+                                       dating_labels[num_test:m], 7)
+        print('Classifier = %d, real answer = %d' % (classify_result, dating_labels[i]), end=' ')
         if classify_result != dating_labels[i]:
             err_count += 1
-            print '[X]'
+            print('[X]')
         else:
-            print '[O]'
-    print "Total error rate = %.2f%%" % (err_count / float(num_test) * 100.0)
+            print('[O]')
+    print("Total error rate = %.2f%%" % (err_count / float(num_test) * 100.0))
+
 
 def classify_person():
     result_list = ['not at all', 'a little', 'very like']
-    play_ratio = float(raw_input('Enter play ratio >> '))
-    flier_mile = float(raw_input('Enter flier miles >> '))
-    ice_cream = float(raw_input('Enter liters of ice cream >> '))
+    play_ratio = float(input('Enter play ratio >> '))
+    flier_mile = float(input('Enter flier miles >> '))
+    ice_cream = float(input('Enter liters of ice cream >> '))
 
     dating_data_matrix, dating_labels = file2matrix('datingTestSet2.txt')
     normalize_dating_data_matrix, ranges, min_val = normalize(dating_data_matrix)
     input = array([flier_mile, play_ratio, ice_cream])
     classify_result = knn_classify((input - min_val) / ranges, normalize_dating_data_matrix,
                                    dating_labels, 3)
-    print 'You will like this person = %s' % result_list[classify_result - 1]
+    print('You will like this person = %s' % result_list[classify_result - 1])
+
 
 if __name__ == '__main__':
     knn_classifier_test()
