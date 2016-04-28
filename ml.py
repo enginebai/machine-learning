@@ -26,3 +26,11 @@ hamming_distance = shape(nonzero(v[0] - v[1])[0])[0]
 print(hamming_distance)
 
 print(distance.pdist(v, 'jaccard'))
+
+vector_matrix = mat([[1, 2, 3], [4, 5, 6]])
+v12 = vector_matrix[0] - vector_matrix[1]
+print(sqrt(v12 * v12.T))
+var_mat = std(vector_matrix.T, axis=0)
+normal_matrix = (vector_matrix - mean(vector_matrix)) / var_mat.T
+normal_v12 = normal_matrix[0] - normal_matrix[1]
+print(sqrt(normal_v12 * normal_v12.T)) 
