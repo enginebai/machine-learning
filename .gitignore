@@ -55,3 +55,4 @@ docs/_build/
 .idea/workspace.xml
 .vscode/
 knn/data/
+data/
